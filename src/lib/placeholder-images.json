@@ -1,0 +1,22 @@
+{
+  "placeholderImages": [
+    {
+      "id": "security-bg",
+      "description": "Abstract cybersecurity network node visualization",
+      "imageUrl": "https://picsum.photos/seed/sentinel-bg/1920/1080",
+      "imageHint": "security network"
+    },
+    {
+      "id": "leak-scan",
+      "description": "Forensic scanning of a paper document",
+      "imageUrl": "https://picsum.photos/seed/sentinel-scan/800/600",
+      "imageHint": "forensic paper"
+    },
+    {
+      "id": "dashboard-preview",
+      "description": "Security terminal interface preview",
+      "imageUrl": "https://picsum.photos/seed/sentinel-dash/1200/800",
+      "imageHint": "data dashboard"
+    }
+  ]
+}

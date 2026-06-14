@@ -1,0 +1,124 @@
+
+{
+  "entities": {
+    "SecurityEvent": {
+      "title": "Security Event",
+      "description": "An immutable record of a security-related action or system event.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string", "description": "The UID of the operator who created the event." },
+        "type": { "type": "string", "enum": ["ENCRYPTION", "GENERATION", "SECURITY", "ACCESS", "VERIFICATION", "ANOMALY", "STORAGE"] },
+        "event": { "type": "string" },
+        "center": { "type": "string" },
+        "status": { "type": "string", "enum": ["VERIFIED", "INVESTIGATING", "ALERT"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "batchId": { "type": "string", "description": "Optional link to a specific paper batch." }
+      },
+      "required": ["userId", "type", "event", "center", "status", "timestamp"]
+    },
+    "QuestionPaper": {
+      "title": "Question Paper",
+      "description": "The full content of a generated examination paper with forensic metadata.",
+      "type": "object",
+      "properties": {
+        "batchId": { "type": "string" },
+        "userId": { "type": "string", "description": "The UID of the creator." },
+        "title": { "type": "string" },
+        "centerId": { "type": "string" },
+        "watermark": { "type": "string" },
+        "qrDataUri": { "type": "string" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "timeLimit": { "type": "number" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "number" },
+              "text": { "type": "string" },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "correctAnswerIndex": { "type": "number" }
+            }
+          }
+        }
+      },
+      "required": ["batchId", "userId", "title", "centerId", "watermark", "generatedAt", "questions"]
+    },
+    "SecurityAlert": {
+      "title": "Security Alert",
+      "description": "A real-time notification of a security threat or system warning.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["Critical", "Warning", "Info"] },
+        "msg": { "type": "string" },
+        "time": { "type": "string" }
+      },
+      "required": ["type", "msg", "time"]
+    },
+    "SystemStat": {
+      "title": "System Statistic",
+      "description": "Key performance and security metrics for the dashboard.",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" },
+        "trend": { "type": "string" },
+        "color": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["label", "value", "trend"]
+    },
+    "ThreatActivity": {
+      "title": "Threat Activity",
+      "description": "Time-series data for threat monitoring charts.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Time label (e.g., 00:00)" },
+        "threats": { "type": "number" },
+        "activity": { "type": "number" }
+      },
+      "required": ["name", "threats", "activity"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Extended information for application users.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "proctor", "analyst"] },
+        "name": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com", "password"]
+  },
+  "firestore": {
+    "/audit_vault/{eventId}": {
+      "schema": "SecurityEvent",
+      "description": "Immutable ledger of all security events."
+    },
+    "/question_papers/{paperId}": {
+      "schema": "QuestionPaper",
+      "description": "Stored examination papers for forensic retrieval."
+    },
+    "/security_alerts/{alertId}": {
+      "schema": "SecurityAlert",
+      "description": "Recent security alerts for the command center."
+    },
+    "/system_stats/{statId}": {
+      "schema": "SystemStat",
+      "description": "Core security metrics displayed on the dashboard."
+    },
+    "/threat_activity/{activityId}": {
+      "schema": "ThreatActivity",
+      "description": "Live threat intelligence activity data."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile data and roles."
+    }
+  }
+}

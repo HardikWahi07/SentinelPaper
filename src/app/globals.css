@@ -1,0 +1,118 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 32% 5%;
+    --foreground: 210 20% 98%;
+    --card: 228 32% 7%;
+    --card-foreground: 210 20% 98%;
+    --popover: 228 32% 5%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 224 81% 55%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 228 20% 12%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 228 20% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 190 80% 50%;
+    --accent-foreground: 228 32% 5%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 228 20% 15%;
+    --input: 228 20% 15%;
+    --ring: 224 81% 55%;
+    --radius: 0.75rem;
+    --sidebar-background: 228 32% 4%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 224 81% 55%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 228 20% 12%;
+    --sidebar-accent-foreground: 190 80% 50%;
+    --sidebar-border: 228 20% 15%;
+    --sidebar-ring: 224 81% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(224, 81%, 55%, 0.05) 0, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(190, 80%, 50%, 0.05) 0, transparent 50%);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tight;
+  }
+}
+
+.glass-panel {
+  @apply bg-card/60 backdrop-blur-md border border-white/10 shadow-xl;
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px -5px hsla(224, 81%, 55%, 0.4);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px -5px hsla(190, 80% , 50%, 0.4);
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    background-image: none !important;
+  }
+  
+  header, 
+  aside, 
+  nav, 
+  button, 
+  .no-print, 
+  [data-sidebar="sidebar"],
+  [role="dialog"] button,
+  .xl\:col-span-1,
+  .print-hide {
+    display: none !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .lg\:ml-64 {
+    margin-left: 0 !important;
+  }
+
+  .glass-panel {
+    background: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-container {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  .print-area {
+    display: block !important;
+    background: white !important;
+    color: black !important;
+  }
+}
