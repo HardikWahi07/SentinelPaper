@@ -34,19 +34,6 @@ SentinelPaper is a high-stakes security platform designed to prevent and trace e
    ```bash
    npm run dev
    ```
-
-## 🔒 Security & Git (Push Protection)
-
-If your push is rejected due to "GITHUB PUSH PROTECTION", it means a secret was detected in your commit history. To fix this and satisfy repository rules, follow these steps:
-
-1. **Authorize the Secret (Optional)**: Click the link provided in the GitHub error message to unblock the push.
-2. **Clean History (Recommended)**: To completely remove the secret from your local history so GitHub accepts the push without violations:
-   ```bash
-   # Reset all commits into a single clean one
-   git reset $(git commit-tree HEAD^{tree} -m "Initial Clean Commit")
-   
-   # Force push the clean history to your repository
-   git push -f origin main
    ```
 
 ---
